@@ -2,7 +2,11 @@
 출퇴근 길 읽을 기사를 pdf 로 만드는 작업.
 
 ## requirements
-다음과 같은 패키지가 설치가 되어야 합니다.
+다음과 같은 패키지가 설치가 되어 있어야 합니다.
+
+### OS & Language
+* macintosh
+* python 2.7
 
 ### Homebrew
 
