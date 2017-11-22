@@ -56,6 +56,7 @@ def save_to_pdf(cont_id, directory, title=None):
     # basic settings
     url = 'http://m.biz.chosun.com/svc/article.html?contid={}'.format(cont_id)
     options = {
+        'footer-right': 'Page [page] of [toPage]',
         'page-size': 'A4',
         'margin-top': '0.40in',
         'margin-bottom': '0.40in',
