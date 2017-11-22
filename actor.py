@@ -13,7 +13,7 @@ def main():
     for content in l:
         content_id = content.get('CONTID').encode('utf-8')
         title = resources.strip_tags(content.get('TITLE').encode('utf-8') + '_')
-        print '[TITLE] {}'.format(title)
+        print '[TITLE {}/{}] {}'.format(l.index(content), len(l), title)
         try:
             r = save_to_pdf(cont_id=content_id, title=title)
             if r is True:
