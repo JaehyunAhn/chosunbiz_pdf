@@ -6,7 +6,7 @@
 
 ### OS & Language
 * macintosh
-* python 2.7
+* python 2.x or python 3.x
 
 ### Homebrew
 

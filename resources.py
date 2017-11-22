@@ -4,7 +4,7 @@ import time
 import random
 import requests
 import pdfkit
-from HTMLParser import HTMLParser
+from html.parser import HTMLParser
 
 
 class MLStripper(HTMLParser, object):
@@ -35,12 +35,12 @@ def get_article_url_list(query):
     }
     r = requests.get(url, headers=headers)
     tot_article_count = int(r.json().get('TOTCNT'))
-    for pn in range(1, tot_article_count / 10 + 2):
+    for pn in range(1, int(tot_article_count / 10) + 2):
         # sleep for a range 1 ~ 4 secs
         _sleep_time = float(random.randrange(10, 40)) / 10
-        print '[{}/{} waiting: {}s] 읽는 중입니다..'.format(pn,
-                                                      tot_article_count / 10 + 1,
-                                                      _sleep_time)
+        print ('[{}/{} waiting: {}s] 읽는 중입니다..'.format(pn,
+                                                      int(tot_article_count / 10) + 1,
+                                                      _sleep_time))
         time.sleep(_sleep_time)
 
         r = requests.get(url + '&pn={}'.format(pn), headers=headers)
@@ -48,7 +48,7 @@ def get_article_url_list(query):
         if contents:
             return_list.extend(contents)
         else:
-            print '[WARNING] no contents in {}&pn={}'.format(url, pn)
+            print ('[WARNING] no contents in {}&pn={}'.format(url, pn))
     return return_list
 
 
@@ -58,14 +58,14 @@ def save_to_pdf(cont_id, directory, title=None):
     options = {
         'page-size': 'A4',
         'margin-top': '0.40in',
-        'margin-bottom': '0.0in',
+        'margin-bottom': '0.40in',
         'margin-right': '0.40in',
         'margin-left': '0.40in',
         'encoding': "UTF-8",
         'no-outline': None,
-        'dpi': 1000,
+        'dpi': 750,
         'load-media-error-handling': 'ignore',
-        'load-error-handling': 'ignore'
+        'load-error-handling': 'ignore',
     }
     # if you need Table of Contents, then uncomment under 4 lines.
     toc = None
@@ -82,10 +82,10 @@ def save_to_pdf(cont_id, directory, title=None):
 
     # if same file already exists,
     if os.path.exists('{}/{}.pdf'.format(directory, file_name)):
-        print '[WARNING] file {}.pdf already exists.'.format(file_name)
+        print ('[WARNING] file {}.pdf already exists.'.format(file_name))
         return False
     else:
-        print '[NOTE] file {}.pdf ready to make..'.format(file_name)
+        print ('[NOTE] file {}.pdf ready to make..'.format(file_name))
     # html url to pdf file
     pdfkit.from_url(url=url,
                     configuration=config,

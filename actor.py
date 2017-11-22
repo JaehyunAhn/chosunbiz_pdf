@@ -1,4 +1,4 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
 import time
 import resources
 
@@ -9,11 +9,11 @@ def save_to_pdf(cont_id, directory='./pdfs', title=None):
     return resources.save_to_pdf(cont_id, directory, title=title)
 
 def main():
-    l = get_article_url_list('미술+그림')
+    l = get_article_url_list('인터스텔라')
     for content in l:
-        content_id = content.get('CONTID').encode('utf-8')
-        title = resources.strip_tags(content.get('TITLE').encode('utf-8') + '_')
-        print '[TITLE {}/{}] {}'.format(l.index(content), len(l), title)
+        content_id = content.get('CONTID')
+        title = resources.strip_tags(content.get('TITLE') + '_')
+        print('[TITLE {}/{}] {}'.format(l.index(content) + 1, len(l), title))
         try:
             r = save_to_pdf(cont_id=content_id, title=title)
             if r is True:
@@ -21,9 +21,9 @@ def main():
             else:
                 continue
         except (IOError, UnicodeDecodeError) as e:
-            print '[ERROR]', e
+            print('[ERROR]', e)
             continue
 
 if __name__ == '__main__':
     main()
-    print '<./actor.py> 종료'
+    print('<./actor.py> 종료')
